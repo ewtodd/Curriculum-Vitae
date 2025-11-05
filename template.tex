@@ -1,0 +1,236 @@
+\documentclass[11pt,a4paper,sans]{moderncv}
+\moderncvcolor{blue}
+\moderncvstyle{classic}
+\definecolor{gold}{rgb}{0.81,0.72,0.53} % gold
+\definecolor{garnet}{rgb}{0.47,0.08,0.15} % garnet
+\colorlet{color2}{gold}
+\colorlet{color0}{black}
+\colorlet{color1}{garnet}
+\colorlet{lastnamecolor}{color1}
+\colorlet{namecolor}{lastnamecolor}
+\colorlet{headrulecolor}{color2}
+\colorlet{firstnamecolor}{lastnamecolor}
+\colorlet{titlecolor}{color2}
+\colorlet{addresscolor}{color1}
+\colorlet{quotecolor}{color1}
+\colorlet{pictureframecolor}{color1}
+%Body
+\colorlet{bodyrulecolor}{color2}
+\colorlet{sectioncolor}{color1}
+\colorlet{subsectioncolor}{color1}
+\colorlet{hintstylecolor}{color0}
+
+\usepackage[scale=0.875]{geometry}
+\setlength{\footskip}{78pt}
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Ubuntu Nerd Font}
+  \setsansfont{Ubuntu Nerd Font}
+  \setmonofont{Ubuntu Nerd Font}
+  \setmathfont{Latin Modern Math}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+\usepackage[english]{babel}
+\usepackage{datetime}
+\def\dates[#1.#2-#3.#4]{\yearabove{\monthname[#1]}{#2}--\yearabove{\monthname[#3]}{#4}}
+\newcommand{\yearabove}[2]{\parbox[t]{10mm}{\centering{#2\par\vspace{-2mm}\tiny{#1}\vspace{1mm}}}}
+\setlength{\hintscolumnwidth}{3cm}
+\usepackage{csquotes}
+\usepackage[style=ieee,
+    maxnames=3,
+    minnames=3,
+    sorting=ydnt]{biblatex}
+%
+\addbibresource{publications.bib}
+\addbibresource{presentations.bib}
+%
+% Bold your name
+\renewcommand*{\mkbibnamefamily}[1]{%
+  \ifdefstring{\namepartfamily}{Todd}{\mkbibbold{#1}}{#1}}
+\renewcommand*{\mkbibnamegiven}[1]{%
+  \ifdefstring{\namepartgiven}{Ethan}{\mkbibbold{#1}}{#1}}
+%
+\usepackage{ragged2e}
+\tolerance=1000
+\emergencystretch=2em
+\renewcommand*{\bibfont}{\small\RaggedRight}
+%
+\AtBeginBibliography{\RaggedRight}
+\usepackage{xurl}
+%
+\usepackage{multicol}
+%
+\usepackage{etaremune}
+%
+%
+\name{Ethan W.}{Todd}
+\email{ewtodd@umich.edu}
+\social[github]{ewtodd}
+\social[orcid]{0009-0003-5162-9044}
+
+%\homepage{ethanwtodd.com}
+\begin{document}
+%
+\makecvhead
+
+\vspace{-0.4cm}
+\section{Education}
+\cventry{\yearabove{Fall}{2023}-- Present}{Candidate, Ph.D. Physics}{}{University of Michigan}{Ann Arbor, MI}{{Advisors: Prof. Igor Jovanovic, Prof. James Wells}
+	\newline{\yearabove{Winter}{2025} M.S. Physics}}
+\cventry{\yearabove{Fall}{2020}--\yearabove{Spring}{2023}}{B.S. Physics}{Summa Cum Laude}{Florida State University}{Tallahassee, FL}{Honors Thesis: Study of Displaced Vertex Tagging with the CMS Experiment
+	\newline{Advisor: Prof. Ted Kolberg}}  % arguments 3 to 6 can be left empty
+\cventry{\yearabove{Fall}{2018}--\yearabove{Spring}{2020}}{Foundational Coursework}{}{Emory University}{Atlanta, GA}{}
+%
+\section{Publications}
+\begin{etaremune}
+	\item \fullcite{Todd2025}
+	\item \fullcite{Graham2025}
+	\item \fullcite{HGCAL2025}
+	\item \fullcite{Yocum2019}
+\end{etaremune}
+%
+\section{Research Experience}
+\cventry{\yearabove{Summer}{2024}--$\,\,$Present}{Graduate Research Assistant}{}{University of Michigan}{Ann Arbor, MI}{
+	Advisor: Prof. Igor Jovanovic
+	\begin{itemize}
+		\item Developed machine learning (ML) based particle identification techniques for inorganic scintillators in which traditional techniques, \textit{i.e.} charge comparison, are ineffective.
+		\item Simulated detection efficiency of gamma rays emitted following thermal neutron capture in lithium and germanium samples in preparation for experiments probing low energy nuclear recoil physics via gamma-ray tagging.
+	\end{itemize}
+}
+%
+\cventry{\yearabove{Summer}{2022}--\yearabove{Summer}{2023}}{Laboratory Assistant}{}{Florida State University}{Tallahassee, FL}{
+	Advisor: Prof. Rachel Yohay
+	\begin{itemize}
+		\item Conducted process quality control (PQC) testing for the CMS High Granularity Calorimeter (HGCAL) to monitor the quality/stability of the silicon sensor production process.
+		\item Analyzed and presented PQC results to the HGCAL sensor testing group.
+		\item Helped create and implement a standardized testing procedure at FSU.
+	\end{itemize}
+}
+%
+\cventry{\yearabove{Fall}{2021}--\yearabove{Spring}{2023}}{Undergraduate Research Assistant}{}{Florida State University}{Tallahassee, FL}{
+	Advisor: Prof. Ted Kolberg
+	\begin{itemize}
+		\item Participated in a deep neural network ML based search for beyond the Standard Model long-lived particles using the CMS Experiment.
+		\item Trained ML models on Monte Carlo data with varying signal (mass, lifetime) and background ($t$, $b$ physics) to verify their ability to identify displaced vertices independently of the particular physics.
+		\item Investigated the most effective parameters of ML models; verified physics-based expectations.
+	\end{itemize}
+}
+\cventry{\yearabove{Summer}{2019}--\yearabove{Fall}{2019}}{Summer Undergraduate Research Experience Fellow}{}{Emory University}{Atlanta, GA}{
+	Advisor: Prof. Susanna Widicus Weaver/Dr. Katarina Yocum
+	\begin{itemize}
+		\item Conducted proof-of-concept millimeter/submillimeter spectroscopic measurements of H$_2$O and D$_2$O binding energy, sublimation enthalpy, and sublimation entropy.
+		\item Assisted in data collection, analysis, and literature review.
+	\end{itemize}
+}
+%
+\cventry{\yearabove{Fall}{2018}--\yearabove{Fall}{2020}}{Undergraduate Research Assistant}{}{Emory University}{Atlanta, GA}{
+	Advisor: Prof. Susanna Widicus Weaver
+	\begin{itemize}
+		\item Performed millimeter/submillimeter spectroscopic measurements of desorbed astrophysical ice analogs.
+		\item Analyzed broadband molecular line surveys using the GOBASIC software package.
+	\end{itemize}
+}
+%
+\section{Teaching Experience}
+\cventry{\yearabove{Fall}{2025}-\yearabove{Winter}{2026}}{Lead Graduate Student Instructor}{}{University of Michigan}{Ann Arbor, MI}{
+	\begin{itemize}
+		\item Oversee 30 graduate student instructors teaching general physics laboratories with a total enrollment of 1800 undergraduate students.
+		\item Edit and maintain the laboratory manuals and Jupyter notebook worksheets used in the course.
+		\item Manage the course information and organization via Canvas.
+		\item Arbitrate student and graduate student instructor concerns.
+	\end{itemize}
+}
+\cventry{\yearabove{Fall}{2023}--\yearabove{Spring}{2025}}{Graduate Student Instructor}{}{University of Michigan}{Ann Arbor, MI}{
+	\begin{itemize}
+		\item \yearabove{Spring}{2025} Physics 251, Fundamental Physics for the Life Sciences II Lab
+		\item \yearabove{Fall}{2024} Physics 121, Physics for Architects Lab
+		\item \yearabove{Fall}{2023}--\yearabove{Winter}{2024} Physics 241, General Physics II Lab
+	\end{itemize}}
+\cventry{\yearabove{Spring}{2022}}{Physics Learning Assistant}{}{Florida State University}{Tallahassee, FL}{PHY 2049C, General Physics B
+}
+\cventry{\yearabove{Fall}{2019}}{Laboratory Teaching Assistant}{}{Emory University}{Atlanta, GA}{CHEM 150L, Structure and Properties Lab
+}
+%
+\section{Honors, Awards, and Grants}
+\cvitemwithcomment{\yearabove{Fall}{2025}}{Rackham Graduate Student Research Grant}{Awarded to conduct research at the Paul Scherrer Institute on the ionization yield of high-purity germanium detectors.}
+\cvitem{\yearabove{Spring}{2023}}{Phi Beta Kappa Society}
+\cvitemwithcomment{\yearabove{Spring}{2023}}{Joseph Lanutti Undergraduate Research Award}{Awarded for third place in the FSU physics departmental poster presentation contest.}
+\cvitemwithcomment{\yearabove{Fall}{2022}}{Evelyn and John Baugh Research Presentation Scholarship}{Awarded to travel and present research at SESAPS.}
+\cvitemwithcomment{\yearabove{Spring}{2022}}{Anna Runyan Undergraduate Endowment}{Awarded for outstanding academic success in physics.}
+%
+\section{Computing}
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{2ex}} p{0.73\textwidth} }
+	Languages         &
+	\begin{minipage}[t]{0.2\textwidth}
+		\textbf{Python:}
+		\begin{itemize}
+			\item NumPy
+			\item SciPy
+			\item PyROOT/uproot
+			\item Scikit-Learn
+		\end{itemize}
+		%
+		\textbf{C++:}
+		\begin{itemize}
+			\item ROOT
+			\item GEANT4
+		\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.5\textwidth}
+		\textbf{Nix:}
+		\begin{itemize}
+			\item Custom nixpkgs
+			\item NixOS configuration
+			\item[]
+			\item[]
+		\end{itemize}
+		\textbf{\LaTeX:}
+		\begin{itemize}
+			\item Self-explanatory$\ldots$
+			\item Beamer
+		\end{itemize}
+	\end{minipage}                                   \\
+	\\
+	Operating Systems & Linux (NixOS, Debian/Ubuntu, Arch Linux), MacOS \\
+\end{tabular}
+
+\pagebreak
+\section{Skills}
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{2ex}} p{0.73\textwidth} }
+	Programming       &
+	C++: ROOT, GEANT4 \linebreak
+	Python: NumPy, SciPy, Scikit-Learn, PyROOT/uproot \linebreak
+	C: (modify and build Chromium EC firmware and coreboot/edk2 firmware). \\
+
+	Software          &
+	\textbf{GEANT4} (Monte Carlo radiation transport),
+	\textbf{ROOT} (data analysis),
+	\textbf{Nix/NixOS} (package management and system configuration),
+	\LaTeX{} (including Beamer).                                           \\
+
+	Hardware          &
+	Use of CAEN digitizers and associated software (CoMPASS, wavedump) for data acquisition;
+	soldering and electronics assembly for experimental setups.            \\
+
+	Operating Systems &
+	Linux (NixOS, Debian/Ubuntu, Arch Linux), macOS.                       \\
+\end{tabular}
+
+\vspace{0.5em}
+
+\textit{Strong preference for open-source software and hardware.}
+%
+\section{Presentations}
+\begin{etaremune}
+	\item \fullcite{EGLS2025}
+	\item \fullcite{UPR2025}
+	\item \fullcite{SESAPS2022}
+	\item \fullcite{SURE2019}
+\end{etaremune}
+\end{document}
