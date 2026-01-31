@@ -57,8 +57,6 @@ EOF
 # Add each page to README
 for i in $(seq 1 "$NUM_PAGES"); do
     PAGE_NUM=$(printf "%03d" "$i")
-    echo "## Page $i" >> "$README"
-    echo "" >> "$README"
     echo "![Page $i]($OUTPUT_DIR/page-$PAGE_NUM.png)" >> "$README"
     echo "" >> "$README"
 done
