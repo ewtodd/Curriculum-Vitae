@@ -1,10 +1,10 @@
 # Script to convert PDF pages to images and embed in README.md
-# Requires: ghostscript (gs) and imagemagick (convert)
+# Requires: poppler_utils (pdftoppm)
 
 PDF_FILE="CV.pdf"
 OUTPUT_DIR="cv_images"
 README="README.md"
-DPI=150  # Adjust for quality (higher = better quality, larger files)
+DPI=300  # High quality
 
 # Check if PDF exists
 if [ ! -f "$PDF_FILE" ]; then
@@ -12,36 +12,29 @@ if [ ! -f "$PDF_FILE" ]; then
     exit 1
 fi
 
-# Create output directory
+# Create output directory (clean it first to avoid duplicates)
+rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
-# Get number of pages using a simpler method
-NUM_PAGES=$(pdfinfo "$PDF_FILE" 2>/dev/null | grep "Pages:" | awk '{print $2}')
+echo "Converting pages to PNG with high quality font rendering..."
 
-# Fallback if pdfinfo not available
-if [ -z "$NUM_PAGES" ]; then
-    echo "Getting page count with ghostscript..."
-    NUM_PAGES=$(gs -q -dNOSAFER -dNODISPLAY -c "($PDF_FILE) (r) file runpdfbegin pdfpagecount = quit" 2>/dev/null)
-fi
+# Use pdftoppm for best quality (preserves fonts perfectly)
+# Output format is page-1.png, page-2.png, etc.
+pdftoppm -png -r $DPI -aa yes -aaVector yes "$PDF_FILE" "$OUTPUT_DIR/page"
 
-# Another fallback - just convert and count files after
-if [ -z "$NUM_PAGES" ] || [ "$NUM_PAGES" -eq 0 ]; then
-    echo "Warning: Could not determine page count. Will count after conversion."
-    NUM_PAGES="unknown"
-fi
+# Rename files to zero-padded format (page-001.png, page-002.png, etc.)
+counter=1
+for file in "$OUTPUT_DIR"/page-*.png; do
+    if [ -f "$file" ]; then
+        newname=$(printf "$OUTPUT_DIR/page-%03d.png" "$counter")
+        if [ "$file" != "$newname" ]; then
+            mv "$file" "$newname"
+        fi
+        ((counter++))
+    fi
+done
 
-echo "Converting pages to PNG..."
-
-# Convert each page to PNG
-gs -dSAFER -dBATCH -dNOPAUSE \
-   -sDEVICE=png16m \
-   -r$DPI \
-   -dTextAlphaBits=4 \
-   -dGraphicsAlphaBits=4 \
-   -sOutputFile="$OUTPUT_DIR/page-%03d.png" \
-   "$PDF_FILE"
-
-# Count actual generated files
+# Count actual PNG files
 NUM_PAGES=$(ls "$OUTPUT_DIR"/page-*.png 2>/dev/null | wc -l)
 
 if [ "$NUM_PAGES" -eq 0 ]; then
@@ -64,8 +57,10 @@ EOF
 # Add each page to README
 for i in $(seq 1 "$NUM_PAGES"); do
     PAGE_NUM=$(printf "%03d" "$i")
+    echo "## Page $i" >> "$README"
+    echo "" >> "$README"
     echo "![Page $i]($OUTPUT_DIR/page-$PAGE_NUM.png)" >> "$README"
     echo "" >> "$README"
 done
 
-echo "Done! README.md created with $NUM_PAGES pages embedded."
+echo "Done! $README created with $NUM_PAGES pages embedded."
