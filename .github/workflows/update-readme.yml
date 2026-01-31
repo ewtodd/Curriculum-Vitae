@@ -1,0 +1,44 @@
+name: Update README with CV Preview
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "CV.pdf"
+      - "CV.tex"
+      - "*.tex" # Any LaTeX files that might affect the CV
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ghostscript poppler-utils
+
+      - name: Generate README with CV preview
+        run: |
+          chmod +x autoupdate.sh
+          ./autoupdate.sh
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code README.md cv_images/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add README.md cv_images/
+          git commit -m "Auto-update CV preview [skip ci]"
+          git push
