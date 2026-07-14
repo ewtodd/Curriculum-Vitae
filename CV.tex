@@ -17,7 +17,7 @@
 \colorlet{bodyrulecolor}{color2}
 \colorlet{sectioncolor}{color1}
 \colorlet{subsectioncolor}{color1}
-\usepackage[scale=0.875]{geometry}
+\usepackage[scale=0.9]{geometry}
 \usepackage{fontspec}
 \usepackage{unicode-math}
 \defaultfontfeatures{Ligatures=TeX}
@@ -36,11 +36,16 @@ colorlinks=true, urlcolor=garnet}
 	maxnames=3,
 	minnames=3,
 	sorting=ydnt]{biblatex}
-%
-\addbibresource{publications.bib}
+        \usepackage{microtype}
+\usepackage{ragged2e}
+\AtBeginBibliography{\RaggedRight\sloppy}
+\AtEveryBibitem{\RaggedRight\sloppy}
+\appto{\bibsetup}{\RaggedRight\sloppy}
+\setlength{\emergencystretch}{20em}\addbibresource{publications.bib}
 \addbibresource{presentations.bib}
 \nopagenumbers{}
 %
+\newcommand{\iso}[2]{$^{#1}$#2}
 % Bold your name
 \renewcommand*{\mkbibnamefamily}[1]{%
 	\ifdefstring{\namepartfamily}{Todd}{\mkbibbold{#1}}{#1}}

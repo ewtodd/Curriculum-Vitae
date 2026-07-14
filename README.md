@@ -10,3 +10,5 @@ This repository contains my CV in LaTeX format. See the CV.pdf file. Below is a 
 
 ![Page 3](cv_images/page-003.png)
 
+![Page 4](cv_images/page-004.png)
+
