@@ -48,7 +48,7 @@ echo "Converted $NUM_PAGES pages successfully."
 cat > "$README" << 'EOF'
 # Curriculum Vitae
 
-This repository contains my CV in LaTeX format. See the CV.pdf file. Below is a preview of the current version:
+This repository contains my CV - see the CV.pdf file. Below is a preview of the current version:
 
 ---
 
